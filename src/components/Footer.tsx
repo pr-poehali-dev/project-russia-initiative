@@ -6,31 +6,31 @@ const data = {
   twitterLink: "https://twitter.com/digitalhub",
   githubLink: "https://github.com/digitalhub",
   services: {
-    web: "/web-razrabotka",
-    mobile: "/mobilnye-prilozheniya",
-    design: "/ui-ux-dizajn",
-    marketing: "/digital-marketing",
+    web: "#",
+    mobile: "#",
+    design: "#",
+    marketing: "#",
   },
   about: {
-    story: "/o-nas",
-    team: "/komanda",
-    portfolio: "/portfolio",
-    careers: "/vakansii",
+    story: "#",
+    team: "#",
+    portfolio: "#",
+    careers: "#",
   },
   help: {
-    faqs: "/faq",
-    support: "/podderzhka",
-    blog: "/blog",
+    faqs: "#",
+    support: "#",
+    blog: "#",
   },
   contact: {
-    email: "hello@digitalhub.ru",
+    email: "info@franchise-consult.ru",
     phone: "+7 (495) 123-45-67",
     address: "Москва, Россия",
   },
   company: {
-    name: "ДиджиталХаб",
+    name: "ФранчайзингПро",
     description:
-      "Создаём цифровые продукты, которые помогают бизнесу расти. Веб-разработка, мобильные приложения и дизайн под ключ.",
+      "Упаковываем бизнес во франшизу, описываем бизнес-процессы, регистрируем товарные знаки и создаём финансовые модели под ключ.",
   },
 }
 
@@ -49,10 +49,10 @@ const aboutLinks = [
 ]
 
 const serviceLinks = [
-  { text: "Веб-разработка", href: data.services.web },
-  { text: "Мобильные приложения", href: data.services.mobile },
-  { text: "UI/UX Дизайн", href: data.services.design },
-  { text: "Digital-маркетинг", href: data.services.marketing },
+  { text: "Упаковка во франшизу", href: data.services.web },
+  { text: "Описание бизнес-процессов", href: data.services.mobile },
+  { text: "Регистрация товарных знаков", href: data.services.design },
+  { text: "Финансовые модели", href: data.services.marketing },
 ]
 
 const helpfulLinks = [

@@ -6,7 +6,7 @@ const PhotographyBanner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const texts = ["БИЗНЕС.", "БРЕНДЫ."]
+  const texts = ["ФРАНШИЗУ.", "БИЗНЕС.", "БРЕНД."]
 
   useEffect(() => {
     const typeSpeed = isDeleting ? 40 : 100
@@ -828,7 +828,7 @@ const PhotographyBanner: React.FC = () => {
             <div className="left-part">
               <h1>
                 <span className="d-flex">
-                  {["С", "О", "З", "Д", "А", "Ё", "М"].map((char, index) => (
+                  {["У", "П", "А", "К", "У", "Е", "М"].map((char, index) => (
                     <span key={index} className="char tracking-tighter" style={{ animationDelay: `${index * 0.08}s` }}>
                       {char === " " ? "\u00A0" : char}
                     </span>
@@ -837,10 +837,10 @@ const PhotographyBanner: React.FC = () => {
                 <span className="text tracking-tighter">{currentText}</span>
               </h1>
               <p className="tracking-widest">
-                Помогаем предпринимателям запускать цифровые продукты быстрее с помощью современных технологий
+                Помогаем предпринимателям масштабировать бизнес через франшизу: упаковка, бизнес-процессы, товарные знаки и финансовые модели под ключ
               </p>
               <a href="#cta" className="book-link">
-                <span className="linktext tracking-tighter text-3xl">Начать проект</span>
+                <span className="linktext tracking-tighter text-3xl">Получить консультацию</span>
                 <span className="arrow">
                   <span></span>
                 </span>
@@ -888,42 +888,42 @@ const PhotographyBanner: React.FC = () => {
           <section className="features-section">
             <div className="features-container">
               <div className="features-content">
-                <h2>Почему выбирают нас?</h2>
+                <h2>Наши <span className="highlight">услуги</span></h2>
               </div>
               <ul className="features-list">
                 <li className="feature-item">
                   <div className="feature-icon">01</div>
                   <div className="feature-text">
-                    <h3>Опытная команда</h3>
+                    <h3>Упаковка во франшизу</h3>
                     <p className="font-light tracking-wider">
-                      Более 10 лет опыта в разработке цифровых продуктов для бизнеса любого масштаба
+                      Создаём полный франчайзинговый пакет: стандарты, регламенты, брендбук и руководство франчайзи
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">02</div>
                   <div className="feature-text">
-                    <h3>Современные технологии</h3>
+                    <h3>Описание бизнес-процессов</h3>
                     <p className="tracking-wider">
-                      Используем передовые инструменты и фреймворки для создания быстрых и надёжных решений
+                      Систематизируем и регламентируем все процессы компании для масштабирования и управления
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">03</div>
                   <div className="feature-text">
-                    <h3>Индивидуальный подход</h3>
+                    <h3>Регистрация товарных знаков</h3>
                     <p className="tracking-wider">
-                      Каждый проект уникален — мы адаптируем решения под ваши конкретные задачи и цели
+                      Защищаем ваш бренд: подготовка документов, сопровождение в Роспатенте, мониторинг
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">04</div>
                   <div className="feature-text">
-                    <h3>Поддержка 24/7</h3>
+                    <h3>Финансовые модели</h3>
                     <p className="tracking-wider">
-                      Обеспечиваем техническую поддержку и сопровождение на всех этапах работы
+                      Разрабатываем детальные финмодели для инвесторов, банков и собственников бизнеса
                     </p>
                   </div>
                 </li>
@@ -937,19 +937,67 @@ const PhotographyBanner: React.FC = () => {
               <div className="testimonials-marquee">
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Команда полностью изменила наш подход к цифровому присутствию. Результаты превзошли все ожидания."
+                    "Упаковали нашу сеть кофеен во франшизу за 2 месяца. Уже продали 5 точек в первый год — результат превзошёл все ожидания."
                   </p>
                   <div className="testimonial-author">
                     <div className="author-avatar">АС</div>
                     <div className="author-info">
                       <h4>Алексей Смирнов</h4>
-                      <p>Директор по развитию</p>
+                      <p>Владелец сети кофеен</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Профессиональный подход и внимание к деталям. Запустили проект в рекордные сроки без потери качества."
+                    "Наконец-то систематизировали все процессы. Теперь бизнес работает без моего постоянного участия. Рекомендую!"
+                  </p>
+                  <div className="testimonial-author">
+                    <div className="author-avatar">МК</div>
+                    <div className="author-info">
+                      <h4>Мария Козлова</h4>
+                      <p>Основатель салона красоты</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-card">
+                  <p className="testimonial-quote">
+                    "Помогли зарегистрировать товарный знак и защитить бренд. Теперь масштабируемся спокойно, никто не скопирует."
+                  </p>
+                  <div className="testimonial-author">
+                    <div className="author-avatar">ДВ</div>
+                    <div className="author-info">
+                      <h4>Дмитрий Волков</h4>
+                      <p>Предприниматель, ритейл</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-card">
+                  <p className="testimonial-quote">
+                    "Финансовая модель убедила инвестора вложить 15 млн в наш проект. Работа выполнена профессионально и в срок."
+                  </p>
+                  <div className="testimonial-author">
+                    <div className="author-avatar">ЕП</div>
+                    <div className="author-info">
+                      <h4>Екатерина Петрова</h4>
+                      <p>Со-основатель EdTech стартапа</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-card">
+                  <p className="testimonial-quote">
+                    "Упаковали нашу сеть кофеен во франшизу за 2 месяца. Уже продали 5 точек в первый год — результат превзошёл все ожидания."
+                  </p>
+                  <div className="testimonial-author">
+                    <div className="author-avatar">АС</div>
+                    <div className="author-info">
+                      <h4>Алексей Смирнов</h4>
+                      <p>Владелец сети кофеен</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-card">
+                  <p className="testimonial-quote">
+                    "Наконец-то систематизировали все процессы. Теперь бизнес работает без моего постоянного участия. Рекомендую!"
                   </p>
                   <div className="testimonial-author">
                     <div className="author-avatar">МК</div>
@@ -961,49 +1009,13 @@ const PhotographyBanner: React.FC = () => {
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "От идеи до запуска — всё прошло гладко. Рекомендую всем, кто ценит качество и скорость."
+                    "Финансовая модель убедила инвестора вложить 15 млн в наш проект. Работа выполнена профессионально и в срок."
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">ДВ</div>
+                    <div className="author-avatar">ЕП</div>
                     <div className="author-info">
-                      <h4>Дмитрий Волков</h4>
-                      <p>Предприниматель</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="testimonial-card">
-                  <p className="testimonial-quote">
-                    "Команда полностью изменила наш подход к цифровому присутствию. Результаты превзошли все ожидания."
-                  </p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar">АС</div>
-                    <div className="author-info">
-                      <h4>Алексей Смирнов</h4>
-                      <p>Директор по развитию</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="testimonial-card">
-                  <p className="testimonial-quote">
-                    "Профессиональный подход и внимание к деталям. Запустили проект в рекордные сроки без потери качества."
-                  </p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar">МК</div>
-                    <div className="author-info">
-                      <h4>Мария Козлова</h4>
-                      <p>Основатель стартапа</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="testimonial-card">
-                  <p className="testimonial-quote">
-                    "От идеи до запуска — всё прошло гладко. Рекомендую всем, кто ценит качество и скорость."
-                  </p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar">ДВ</div>
-                    <div className="author-info">
-                      <h4>Дмитрий Волков</h4>
-                      <p>Предприниматель</p>
+                      <h4>Екатерина Петрова</h4>
+                      <p>Со-основатель EdTech стартапа</p>
                     </div>
                   </div>
                 </div>
@@ -1013,13 +1025,13 @@ const PhotographyBanner: React.FC = () => {
 
           <section className="cta-section" id="cta">
             <div className="cta-container">
-              <h2 className="cta-title text-center">Готовы начать?</h2>
+              <h2 className="cta-title text-center">Готовы масштабироваться?</h2>
               <p className="cta-subtitle">
-                Присоединяйтесь к сотням компаний, которые уже трансформировали свой бизнес. Ваш путь к успеху начинается здесь.
+                Присоединяйтесь к сотням предпринимателей, которые уже упаковали свой бизнес во франшизу и вышли на новый уровень. Первый шаг — бесплатная консультация.
               </p>
               <div className="cta-buttons">
                 <a href="#" className="cta-button">
-                  Обсудить проект
+                  Получить консультацию
                 </a>
                 <a href="#" className="cta-button secondary">
                   Посмотреть кейсы
