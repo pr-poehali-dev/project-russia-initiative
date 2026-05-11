@@ -1,10 +1,17 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 
+const SUBMIT_URL = "https://functions.poehali.dev/840999fb-b407-4a34-815e-64f160816bd7"
+
 const PhotographyBanner: React.FC = () => {
   const [currentText, setCurrentText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [formData, setFormData] = useState({ name: "", phone: "", message: "" })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
 
   const texts = ["ФРАНШИЗУ.", "БИЗНЕС.", "БРЕНД."]
 
@@ -31,6 +38,33 @@ const PhotographyBanner: React.FC = () => {
 
     return () => clearTimeout(timer)
   }, [currentText, currentIndex, isDeleting, texts])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setError("")
+    try {
+      const res = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setSubmitted(true)
+        setFormData({ name: "", phone: "", message: "" })
+      } else {
+        setError(data.error || "Ошибка отправки, попробуйте ещё раз")
+      }
+    } catch {
+      setError("Ошибка сети, попробуйте ещё раз")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const openModal = () => { setModalOpen(true); setSubmitted(false); setError("") }
+  const closeModal = () => setModalOpen(false)
 
   return (
     <>
@@ -820,6 +854,203 @@ const PhotographyBanner: React.FC = () => {
             max-width: 300px;
           }
         }
+
+        .stats-section {
+          padding: 80px 30px;
+          background-color: #002b36;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stats-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 40px;
+          text-align: center;
+        }
+
+        .stat-item {
+          padding: 40px 20px;
+          border: 1px solid rgba(211, 54, 130, 0.2);
+          border-radius: 16px;
+          background: rgba(255,255,255,0.03);
+          transition: border-color 0.3s;
+        }
+
+        .stat-item:hover {
+          border-color: rgba(211, 54, 130, 0.5);
+        }
+
+        .stat-number {
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: clamp(40px, 6vw, 72px);
+          color: #d33682;
+          line-height: 1;
+          margin-bottom: 12px;
+        }
+
+        .stat-label {
+          font-family: "Montserrat", sans-serif;
+          font-size: 15px;
+          color: #aaa;
+          line-height: 1.4;
+        }
+
+        @media screen and (max-width: 767px) {
+          .stats-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
+        }
+
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.75);
+          backdrop-filter: blur(4px);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+
+        .modal-box {
+          background: #073642;
+          border: 1px solid #d33682;
+          border-radius: 20px;
+          padding: 50px 40px;
+          width: 100%;
+          max-width: 480px;
+          position: relative;
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: none;
+          border: none;
+          color: #aaa;
+          font-size: 24px;
+          cursor: pointer;
+          line-height: 1;
+          transition: color 0.2s;
+        }
+
+        .modal-close:hover { color: #fff; }
+
+        .modal-title {
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: 28px;
+          color: #fff;
+          margin: 0 0 8px;
+          text-transform: uppercase;
+        }
+
+        .modal-subtitle {
+          font-family: "Montserrat";
+          font-size: 14px;
+          color: #aaa;
+          margin: 0 0 32px;
+          line-height: 1.6;
+        }
+
+        .modal-field {
+          margin-bottom: 16px;
+        }
+
+        .modal-field label {
+          display: block;
+          font-family: "Montserrat";
+          font-size: 12px;
+          color: #d33682;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 8px;
+        }
+
+        .modal-field input,
+        .modal-field textarea {
+          width: 100%;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid #333;
+          border-radius: 10px;
+          padding: 14px 16px;
+          font-family: "Montserrat";
+          font-size: 15px;
+          color: #fff;
+          outline: none;
+          transition: border-color 0.3s;
+          box-sizing: border-box;
+        }
+
+        .modal-field input:focus,
+        .modal-field textarea:focus {
+          border-color: #d33682;
+        }
+
+        .modal-field textarea {
+          resize: vertical;
+          min-height: 90px;
+        }
+
+        .modal-submit {
+          width: 100%;
+          margin-top: 8px;
+          padding: 16px;
+          background: #d33682;
+          color: #002b36;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: 16px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .modal-submit:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); }
+        .modal-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .modal-error {
+          color: #ff6b6b;
+          font-family: "Montserrat";
+          font-size: 13px;
+          margin-top: 10px;
+        }
+
+        .modal-success {
+          text-align: center;
+          padding: 20px 0;
+        }
+
+        .modal-success-icon {
+          font-size: 60px;
+          margin-bottom: 20px;
+        }
+
+        .modal-success h3 {
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: 22px;
+          color: #fff;
+          margin: 0 0 10px;
+        }
+
+        .modal-success p {
+          font-family: "Montserrat";
+          font-size: 15px;
+          color: #aaa;
+          line-height: 1.6;
+          margin: 0;
+        }
       `}</style>
 
       <div className="photography-banner">
@@ -839,7 +1070,7 @@ const PhotographyBanner: React.FC = () => {
               <p className="tracking-widest">
                 Помогаем предпринимателям масштабировать бизнес через франшизу: упаковка, бизнес-процессы, товарные знаки и финансовые модели под ключ
               </p>
-              <a href="#cta" className="book-link">
+              <a onClick={openModal} href="#" className="book-link" style={{cursor:"pointer"}}>
                 <span className="linktext tracking-tighter text-3xl">Получить консультацию</span>
                 <span className="arrow">
                   <span></span>
@@ -881,6 +1112,27 @@ const PhotographyBanner: React.FC = () => {
                   alt="dash-circle"
                   style={{ filter: "hue-rotate(280deg) saturate(1.5)" }}
                 />
+              </div>
+            </div>
+          </section>
+
+          <section className="stats-section">
+            <div className="stats-container">
+              <div className="stat-item">
+                <div className="stat-number">50+</div>
+                <div className="stat-label">франшиз упаковано<br/>под ключ</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">10</div>
+                <div className="stat-label">лет на рынке<br/>консалтинга</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">200+</div>
+                <div className="stat-label">успешных<br/>клиентов</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">98%</div>
+                <div className="stat-label">клиентов рекомендуют<br/>нас партнёрам</div>
               </div>
             </div>
           </section>
@@ -1030,9 +1282,9 @@ const PhotographyBanner: React.FC = () => {
                 Присоединяйтесь к сотням предпринимателей, которые уже упаковали свой бизнес во франшизу и вышли на новый уровень. Первый шаг — бесплатная консультация.
               </p>
               <div className="cta-buttons">
-                <a href="#" className="cta-button">
+                <button onClick={openModal} className="cta-button" style={{border:"none",cursor:"pointer"}}>
                   Получить консультацию
-                </a>
+                </button>
                 <a href="#" className="cta-button secondary">
                   Посмотреть кейсы
                 </a>
@@ -1041,6 +1293,60 @@ const PhotographyBanner: React.FC = () => {
           </section>
         </main>
       </div>
+
+      {modalOpen && (
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
+          <div className="modal-box">
+            <button className="modal-close" onClick={closeModal}>✕</button>
+            {submitted ? (
+              <div className="modal-success">
+                <div className="modal-success-icon">🎉</div>
+                <h3>Заявка принята!</h3>
+                <p>Мы свяжемся с вами в течение 1 рабочего дня и расскажем, как упаковать ваш бизнес во франшизу.</p>
+              </div>
+            ) : (
+              <>
+                <h2 className="modal-title">Бесплатная консультация</h2>
+                <p className="modal-subtitle">Оставьте контакты — мы перезвоним и ответим на все вопросы</p>
+                <form onSubmit={handleSubmit}>
+                  <div className="modal-field">
+                    <label>Ваше имя *</label>
+                    <input
+                      type="text"
+                      placeholder="Иван Иванов"
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="modal-field">
+                    <label>Телефон *</label>
+                    <input
+                      type="tel"
+                      placeholder="+7 999 123-45-67"
+                      value={formData.phone}
+                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="modal-field">
+                    <label>Расскажите о бизнесе</label>
+                    <textarea
+                      placeholder="Кратко опишите ваш бизнес и что хотите упаковать..."
+                      value={formData.message}
+                      onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    />
+                  </div>
+                  {error && <div className="modal-error">{error}</div>}
+                  <button type="submit" className="modal-submit" disabled={submitting}>
+                    {submitting ? "Отправляю..." : "Отправить заявку"}
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }
